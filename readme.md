@@ -7,7 +7,7 @@ src/archive.sh URL
 
 **Otherwise, Getting started**
 
-(Omit step 2 and 3 if you just want to store the files locally)
+(Omit step 1, 2 and 3 if you just want to store the files locally)
 
 1. Setup `bin/rclone config`.
 2. Edit `youtube:` in `src/archive.sh:7` to the name of your remote storage.
@@ -19,4 +19,5 @@ src/archive.sh URL
 ```
 
 **TODO**
+
 Run `rclone` after downloading each file. (This will lessen the required local disk space when downloading multiple videos in a single `youtube-dl` run)
