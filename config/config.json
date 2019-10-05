@@ -1,5 +1,5 @@
 {
   "destination": "youtube:",
   "nagare_path": "/mnt/d/code/nagare",
-  "rclone_bwlimit": "20MB"
+  "rclone_bwlimit": "30M"
 }

@@ -23,4 +23,4 @@ Removes duplicate(by ID) files in remote storage and in `archive.txt`.
 
 - script to check if a specific ID is in remote storage AND archive.txt
 - option to store locally
-- display "5 of 70" in console log
+- script to delete a channel from remote storage AND archive.txt
