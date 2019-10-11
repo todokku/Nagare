@@ -34,5 +34,6 @@ while IFS= read -r channel_url
 do
   echo -e "[$(date +"%Y-%m-%d %H:%M:%S")] ${PREFIX} Processing channel ${FG_GREEN}$((INDEX++))${DEFAULT} of ${FG_GREEN}${NUMOFLINES}${DEFAULT}"
   echo -e "[$(date +"%Y-%m-%d %H:%M:%S")] ${PREFIX} Processing ${FG_GREEN}${channel_url}${DEFAULT}"
-  src/archive_v2.sh "$channel_url"
+  src/archive.sh "$channel_url"
+  src/cleanup.sh
 done < config/channels.txt

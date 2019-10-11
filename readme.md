@@ -1,6 +1,6 @@
 # Getting started
 
-(Omit step 2 and 3 if you just want to store the files locally)
+(Omit step 2 and 3 if you just want to store the files locally (THIS IS NOT SUPPORTED YET. YOU MUST SETUP RCLONE.))
 
 1. Edit `nagare_path` in `config/config.json` to the full path to `Nagare` folder.
 2. Setup `bin/rclone config` for remote storage.
