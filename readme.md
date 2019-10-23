@@ -1,3 +1,15 @@
+# Current version
+2.2.0
+
+# Screenshot example
+<h1 align="center">
+  <img width="600" src="ss.png"></img>
+</h1>
+
+# Requirements
+- `jq`
+- `python`
+
 # Getting started
 
 (Omit step 2 and 3 if you just want to store the files locally (THIS IS NOT SUPPORTED YET. YOU MUST SETUP RCLONE.))

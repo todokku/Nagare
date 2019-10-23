@@ -19,7 +19,7 @@ FG_MAGENTA="\033[1;35m"
 FG_CYAN="\033[1;36m"
 FG_WHITE="\033[1;37m"
 
-NAGARE_PATH=$(cat config/config.json | bin/jq -r ".nagare_path")
+NAGARE_PATH=$(cat config/config.json | jq -r ".nagare_path")
 cd "${NAGARE_PATH}"
 
 PREFIX="[${FG_MAGENTA}upkeep.sh${DEFAULT}]"

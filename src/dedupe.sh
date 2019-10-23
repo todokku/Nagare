@@ -19,36 +19,39 @@ FG_MAGENTA="\033[1;35m"
 FG_CYAN="\033[1;36m"
 FG_WHITE="\033[1;37m"
 
-NAGARE_PATH=$(cat config/config.json | bin/jq -r ".nagare_path")
+NAGARE_PATH=$(cat config/config.json | jq -r ".nagare_path")
 cd "${NAGARE_PATH}"
 
 PREFIX="[${FG_CYAN}dedupe.sh${DEFAULT}]"
 
-DESTINATION="$(cat config/config.json | bin/jq -r ".destination")"
+DESTINATION="$(cat config/config.json | jq -r ".destination")"
 
-# Save IDs in asdf.txt
-echo -e "${PREFIX} Savings IDs in ${FG_GREEN}asdf.txt${DEFAULT}"
-bin/rclone lsf $DESTINATION -R | cut -d "/" -f 2 | cut -d "]" -f 1 | cut -d "[" -f 2 > temp/asdf.txt
+echo -e "[$(date +"%Y-%m-%d %H:%M:%S")] ${PREFIX} Cleaning up leftover files from previous runs"
+src/cleanup.sh
 
-# Remove empty lines from asdf.txt
-sed -i "/^$/d" temp/asdf.txt
+# Save IDs in ids.txt
+echo -e "[$(date +"%Y-%m-%d %H:%M:%S")] ${PREFIX} Extracting IDs from ${FG_YELLOW}${DESTINATION}${DEFAULT} to ${FG_GREEN}ids.txt${DEFAULT}"
+bin/rclone lsf ${DESTINATION} -R | cut -d "/" -f 2 | cut -d "]" -f 1 | cut -d "[" -f 2 > temp/ids.txt
+
+# Remove empty lines from ids.txt
+sed -i "/^$/d" temp/ids.txt
 
 # Extract duplicates lines
-echo -e "${PREFIX} Extracting dupes into ${FG_GREEN}dupe.txt${DEFAULT}"
-sort -n temp/asdf.txt | uniq -d > temp/dupe.txt
+echo -e "[$(date +"%Y-%m-%d %H:%M:%S")] ${PREFIX} Extracting dupes into ${FG_GREEN}dupe.txt${DEFAULT}"
+sort -n temp/ids.txt | uniq -d > temp/dupe.txt
 
 while IFS= read -r line
 do
   # Delete dupes from DESTINATION
-  echo -e "${PREFIX} Deleting dupes from ${FG_GREEN}${DESTINATION}${DEFAULT}"
-  bin/rclone delete -n $DESTINATION --include "*$line*"
+  echo -e "[$(date +"%Y-%m-%d %H:%M:%S")] ${PREFIX} Deleting ${FG_GREEN}${line}${DEFAULT} from ${FG_YELLOW}${DESTINATION}${DEFAULT}"
+  bin/rclone delete ${DESTINATION} --include "*${line}*"
 
   # Delete dupes from archive.txt
-  echo -e "${PREFIX} Deleting dupes from ${FG_GREEN}archives.txt${DEFAULT}"
-  sed -i "/^youtube ${line}/d" temp/archive.txt
+  echo -e "[$(date +"%Y-%m-%d %H:%M:%S")] ${PREFIX} Deleting ${FG_GREEN}${line}${DEFAULT} from ${FG_GREEN}archives.txt${DEFAULT}"
+  sed -i "/^youtube ${line}/d" config/archive.txt
 done < temp/dupe.txt
 
-echo -e "${PREFIX} Deleting ${FG_GREEN}asdf.txt${DEFAULT}"
-rm temp/asdf.txt
-echo -e "${PREFIX} Deleting ${FG_GREEN}dupe.txt${DEFAULT}"
+echo -e "[$(date +"%Y-%m-%d %H:%M:%S")] ${PREFIX} Deleting ${FG_GREEN}ids.txt${DEFAULT}"
+rm temp/ids.txt
+echo -e "[$(date +"%Y-%m-%d %H:%M:%S")] ${PREFIX} Deleting ${FG_GREEN}dupe.txt${DEFAULT}"
 rm temp/dupe.txt
