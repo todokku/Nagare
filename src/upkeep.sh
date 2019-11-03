@@ -24,7 +24,16 @@ cd "${NAGARE_PATH}"
 
 PREFIX="[${FG_MAGENTA}upkeep.sh${DEFAULT}]"
 
-echo -e "[$(date +"%Y-%m-%d %H:%M:%S")] ${PREFIX} Cleaning up leftover files from previous runs"
+if [ ! -f "config/archive.txt" ]; then
+  echo -e "${FG_GREEN}archive.txt${FG_WHITE} does not exist. Do you want to run getid.sh first? (Y/N)${DEFAULT}"
+  read user_input
+  if [ "$user_input" == "Y" || "$user_input" == "y" ]; then
+    src/getid.sh
+    mv "temp/ids_sorted.txt" "config/archive.txt"
+  fi
+fi
+
+# echo -e "[$(date +"%Y-%m-%d %H:%M:%S")] ${PREFIX} Cleaning up leftover files from previous runs"
 src/cleanup.sh
 
 INDEX=1

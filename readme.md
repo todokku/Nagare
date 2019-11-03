@@ -1,5 +1,5 @@
 # Current version
-2.2.0
+2.2.1
 
 # Screenshot example
 <h1 align="center">
@@ -30,6 +30,14 @@
 src/dedupe.sh
 ```
 Removes duplicate(by ID) files in remote storage and in `archive.txt`.
+
+**Get ID of all videos in remote storage**
+```bash
+src/getid.sh
+```
+Get ID of all videos in remote storage and store it in `temp/ids_sorted.txt`.  
+This is useful when setting up *Nagare* on a new host machine, since `archive.txt` is not saved anywhere but locally.  
+Now all you have to do is copy the content into `config/archive.txt`.
 
 # TODO
 

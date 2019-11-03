@@ -33,15 +33,15 @@ touch temp/current.txt
 touch temp/diff.txt
 
 # Saving videos URL from channel in current.txt
-echo -e "[$(date +"%Y-%m-%d %H:%M:%S")] ${PREFIX} Saving videos URL in ${FG_GREEN}temp/current.txt${DEFAULT}"
+# echo -e "[$(date +"%Y-%m-%d %H:%M:%S")] ${PREFIX} Saving videos URL in ${FG_GREEN}temp/current.txt${DEFAULT}"
 bin/youtube-dl -j --flat-playlist $URL | jq -r ".id" | sed "s_^_youtube _" >> temp/current.txt
 
 # Sorting current.txt
-echo -e "[$(date +"%Y-%m-%d %H:%M:%S")] ${PREFIX} Sorting ${FG_GREEN}temp/current.txt${DEFAULT}"
+# echo -e "[$(date +"%Y-%m-%d %H:%M:%S")] ${PREFIX} Sorting ${FG_GREEN}temp/current.txt${DEFAULT}"
 sort -n temp/current.txt > temp/current_sorted.txt
 
 # Extracting new videos URL from current.txt by comparing it to archive.txt
-echo -e "[$(date +"%Y-%m-%d %H:%M:%S")] ${PREFIX} Extracting new videos URL to ${FG_GREEN}temp/diff.txt${DEFAULT}"
+# echo -e "[$(date +"%Y-%m-%d %H:%M:%S")] ${PREFIX} Extracting new videos URL to ${FG_GREEN}temp/diff.txt${DEFAULT}"
 comm -23 temp/current_sorted.txt config/archive.txt > temp/diff.txt
 
 INDEX=1
@@ -55,9 +55,9 @@ fi
 while IFS= read -r line
 do
   # Download video
-  echo -e "[$(date +"%Y-%m-%d %H:%M:%S")] ${PREFIX} Downloading video ${FG_GREEN}$((INDEX++))${DEFAULT} of ${FG_GREEN}${NUMOFLINES}${DEFAULT}"
+  echo -e "[$(date +"%Y-%m-%d %H:%M:%S")] ${PREFIX} Downloading video ${FG_YELLOW}$((INDEX++))${DEFAULT} of ${FG_YELLOW}${NUMOFLINES}${DEFAULT}"
   YOUTUBE_ID="$(echo ${line} | cut -d " " -f 2)"
-  echo -e "[$(date +"%Y-%m-%d %H:%M:%S")] ${PREFIX} Downloading ${FG_GREEN}https://youtu.be/${YOUTUBE_ID}${DEFAULT}"
+  echo -e "[$(date +"%Y-%m-%d %H:%M:%S")] ${PREFIX} Downloading ${FG_YELLOW}https://youtu.be/${YOUTUBE_ID}${DEFAULT}"
   bin/youtube-dl --config-location config/youtube-dl.conf "https://youtu.be/${YOUTUBE_ID}"
 
   # Upload video
