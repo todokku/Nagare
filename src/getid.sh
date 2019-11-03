@@ -26,8 +26,8 @@ PREFIX="[${FG_CYAN}getid.sh${DEFAULT}]"
 
 DESTINATION="$(cat config/config.json | jq -r ".destination")"
 
-echo -e "[$(date +"%Y-%m-%d %H:%M:%S")] ${PREFIX} Cleaning up leftover files from previous runs"
-src/cleanup.sh
+# echo -e "[$(date +"%Y-%m-%d %H:%M:%S")] ${PREFIX} Cleaning up leftover files from previous runs"
+rm temp/* -f
 
 # Save IDs in ids.txt
 echo -e "[$(date +"%Y-%m-%d %H:%M:%S")] ${PREFIX} Savings IDs in ${FG_GREEN}ids.txt${DEFAULT}"

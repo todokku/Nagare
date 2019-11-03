@@ -1,5 +1,5 @@
 # Current version
-2.2.1
+2.2.2
 
 # Screenshot example
 <h1 align="center">
@@ -14,6 +14,7 @@
 
 (Omit step 2 and 3 if you just want to store the files locally (THIS IS NOT SUPPORTED YET. YOU MUST SETUP RCLONE.))
 
+0. `chmod u+x `
 1. Edit `nagare_path` in `config/config.json` to the full path to `Nagare` folder.
 2. Setup `bin/rclone config` for remote storage.
 3. Edit `destination` in `config/config.json` to the name of your remote storage.

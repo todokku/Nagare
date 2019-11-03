@@ -24,10 +24,18 @@ cd "${NAGARE_PATH}"
 
 PREFIX="[${FG_MAGENTA}upkeep.sh${DEFAULT}]"
 
+if [ ! -d "archives" ]; then
+  mkdir archives
+fi
+
+if [ ! -d "temp" ]; then
+  mkdir temp
+fi
+
 if [ ! -f "config/archive.txt" ]; then
   echo -e "${FG_GREEN}archive.txt${FG_WHITE} does not exist. Do you want to run getid.sh first? (Y/N)${DEFAULT}"
   read user_input
-  if [ "$user_input" == "Y" || "$user_input" == "y" ]; then
+  if [[ "$user_input" == "Y" || "$user_input" == "y" ]]; then
     src/getid.sh
     mv "temp/ids_sorted.txt" "config/archive.txt"
   fi
