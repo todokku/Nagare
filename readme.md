@@ -1,5 +1,5 @@
 # Current version
-2.2.2
+2.2.3
 
 # Screenshot example
 <h1 align="center">

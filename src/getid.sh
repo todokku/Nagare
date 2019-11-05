@@ -31,7 +31,7 @@ rm temp/* -f
 
 # Save IDs in ids.txt
 echo -e "[$(date +"%Y-%m-%d %H:%M:%S")] ${PREFIX} Savings IDs in ${FG_GREEN}ids.txt${DEFAULT}"
-bin/rclone lsf ${DESTINATION} -R | cut -d "/" -f 2 | cut -d "]" -f 1 | cut -d "[" -f 2 > temp/ids.txt
+bin/rclone lsf ${DESTINATION} -R --config="config/rclone.conf" | cut -d "/" -f 2 | cut -d "]" -f 1 | cut -d "[" -f 2 > temp/ids.txt
 
 # Remove empty lines from ids.txt
 sed -i "/^$/d" temp/ids.txt

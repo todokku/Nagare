@@ -31,7 +31,7 @@ src/cleanup.sh
 
 # Save IDs in ids.txt
 echo -e "[$(date +"%Y-%m-%d %H:%M:%S")] ${PREFIX} Extracting IDs from ${FG_YELLOW}${DESTINATION}${DEFAULT} to ${FG_GREEN}ids.txt${DEFAULT}"
-bin/rclone lsf ${DESTINATION} -R | cut -d "/" -f 2 | cut -d "]" -f 1 | cut -d "[" -f 2 > temp/ids.txt
+bin/rclone lsf ${DESTINATION} -R --config="config/rclone.conf" | cut -d "/" -f 2 | cut -d "]" -f 1 | cut -d "[" -f 2 > temp/ids.txt
 
 # Remove empty lines from ids.txt
 sed -i "/^$/d" temp/ids.txt
@@ -44,7 +44,7 @@ while IFS= read -r line
 do
   # Delete dupes from DESTINATION
   echo -e "[$(date +"%Y-%m-%d %H:%M:%S")] ${PREFIX} Deleting ${FG_GREEN}${line}${DEFAULT} from ${FG_YELLOW}${DESTINATION}${DEFAULT}"
-  bin/rclone delete ${DESTINATION} --include "*${line}*"
+  bin/rclone delete ${DESTINATION} --include "*${line}*" --config="config/rclone.conf"
 
   # Delete dupes from archive.txt
   echo -e "[$(date +"%Y-%m-%d %H:%M:%S")] ${PREFIX} Deleting ${FG_GREEN}${line}${DEFAULT} from ${FG_GREEN}archives.txt${DEFAULT}"

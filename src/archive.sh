@@ -62,5 +62,5 @@ do
 
   # Upload video
   echo -e "[$(date +"%Y-%m-%d %H:%M:%S")] ${PREFIX} Uploading to ${FG_YELLOW}${DESTINATION}${DEFAULT}"
-  bin/rclone --exclude "*.part" move archives/ ${DESTINATION} --bwlimit ${RCLONE_BWLIMIT} --stats-one-line --stats 1m -q
+  bin/rclone --exclude "*.part" move archives/ ${DESTINATION} --bwlimit ${RCLONE_BWLIMIT} --stats-one-line --stats 1s --progress -q --config="config/rclone.conf"
 done < temp/diff.txt
