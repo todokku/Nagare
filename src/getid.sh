@@ -19,8 +19,8 @@ FG_MAGENTA="\033[1;35m"
 FG_CYAN="\033[1;36m"
 FG_WHITE="\033[1;37m"
 
-NAGARE_PATH=$(cat config/config.json | jq -r ".nagare_path")
-cd "${NAGARE_PATH}"
+script_path="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+cd "${script_path}/.."
 
 PREFIX="[${FG_CYAN}getid.sh${DEFAULT}]"
 

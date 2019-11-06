@@ -19,8 +19,8 @@ FG_MAGENTA="\033[1;35m"
 FG_CYAN="\033[1;36m"
 FG_WHITE="\033[1;37m"
 
-NAGARE_PATH=$(cat config/config.json | jq -r ".nagare_path")
-cd "${NAGARE_PATH}"
+script_path="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+cd "${script_path}/.."
 
 PREFIX="[${FG_MAGENTA}upkeep.sh${DEFAULT}]"
 
@@ -33,12 +33,13 @@ if [ ! -d "temp" ]; then
 fi
 
 if [ ! -f "config/archive.txt" ]; then
-  echo -e "${FG_GREEN}archive.txt${FG_WHITE} does not exist. Do you want to run getid.sh first? (Y/N)${DEFAULT}"
-  read user_input
-  if [[ "$user_input" == "Y" || "$user_input" == "y" ]]; then
+  # echo -e "${FG_GREEN}archive.txt${FG_WHITE} does not exist. Do you want to run getid.sh first? (Y/N)${DEFAULT}"
+  # read user_input
+  # if [[ "$user_input" == "Y" || "$user_input" == "y" ]]; then
+    echo -e "${FG_GREEN}archive.txt${FG_WHITE} does not exist. Running ${FG_CYAN}getid.sh${DEFAULT}"
     src/getid.sh
     mv "temp/ids_sorted.txt" "config/archive.txt"
-  fi
+  # fi
 fi
 
 # echo -e "[$(date +"%Y-%m-%d %H:%M:%S")] ${PREFIX} Cleaning up leftover files from previous runs"
