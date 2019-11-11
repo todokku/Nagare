@@ -33,4 +33,4 @@ rm config/archive.txt
 mv config/archive_sorted.txt config/archive.txt
 
 # echo -e "[$(date +"%Y-%m-%d %H:%M:%S")] ${PREFIX} Deleting subfolders (if empty) in ${FG_GREEN}archives/${DEFAULT}"
-find "${NAGARE_PATH}/archives" -mindepth 1 -type d -empty -delete
+find "archives/" -mindepth 1 -type d -empty -delete
