@@ -15,7 +15,7 @@
 (Omit step 2 and 3 if you just want to store the files locally (THIS IS NOT SUPPORTED YET. YOU MUST SETUP RCLONE.))
 
 1. `chmod u+x src/* && chmod u+x bin/*`
-2. Setup `bin/rclone config` for remote storage.
+2. Setup `bin/rclone config --config="config/rclone.conf"` for remote storage.
 3. Edit `destination` in `config/config.json` to the name of your remote storage.
 4. Create `config/channels.txt` and write each YouTube channel URL on a new line.
 5. Make a cron job (adjust the frequency as needed).
